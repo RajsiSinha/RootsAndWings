@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../assets/rootsWingsLogo.png'
+import logo from '../../assets/RootsWingsLogo.png'
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 
 const Navbar = () => {
