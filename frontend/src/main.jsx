@@ -30,7 +30,7 @@ const AuthWrapper = () => {
     if (isLoaded && isSignedIn && user) {
       // Call your backend to create/find the user
       // Note: Make sure the URL matches your backend route
-      fetch('http://localhost:5000/api/users/get-user', {
+      fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/get-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
