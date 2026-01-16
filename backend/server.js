@@ -32,6 +32,7 @@ app.get('/', (req, res) => {
   res.send('Roots & Wings API is Running!');
 });
 app.use('/api/users', userRoutes);
+app.use('/api/adoption', adoptionRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

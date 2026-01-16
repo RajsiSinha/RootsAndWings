@@ -1,5 +1,15 @@
 import React from 'react';
 import { UserButton, useUser } from "@clerk/clerk-react";
+// 1. Import the specific icons you need
+import { 
+  LayoutDashboard, 
+  Calendar, 
+  HeartHandshake, 
+  Users, 
+  Settings, 
+  Leaf, 
+  X 
+} from "lucide-react";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
   const { user } = useUser();
@@ -15,28 +25,30 @@ export default function Sidebar({ isOpen, setIsOpen }) {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="size-10 rounded-xl bg-[#3cc9e1] flex items-center justify-center text-white shadow-md shadow-[#5a8c76]/20">
-              <span className="material-symbols-outlined">eco</span>
+              {/* Replaced 'eco' with Lucide Leaf */}
+              <Leaf size={24} />
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-extrabold text-[#3cc9e1] leading-tight">Roots of Love</h1>
               <p className="text-[#7d6e63]/60 text-[10px] font-bold uppercase tracking-wider">Donor Portal</p>
             </div>
           </div>
-          {/* Mobile Close Button */}
+          {/* Mobile Close Button - Replaced span with Lucide X */}
           <button onClick={() => setIsOpen(false)} className="lg:hidden text-[#7d6e63]">
-            <span className="material-symbols-outlined">close</span>
+            <X size={24} />
           </button>
         </div>
         
         {/* Navigation Buttons */}
         <nav className="flex flex-col gap-1.5">
-          <NavItem icon="dashboard" label="Overview" active />
-          <NavItem icon="calendar_today" label="My Adoptions" />
-          <NavItem icon="volunteer_activism" label="Impact Stories" />
-          <NavItem icon="diversity_3" label="Groups" />
+          {/* Pass the Icon Component directly, not a string */}
+          <NavItem icon={LayoutDashboard} label="Overview" active />
+          <NavItem icon={Calendar} label="My Adoptions" />
+          <NavItem icon={HeartHandshake} label="Impact Stories" />
+          <NavItem icon={Users} label="Groups" />
           
           <div className="pt-6 mt-6 border-t border-[#e8e4db]">
-            <NavItem icon="settings" label="Account" />
+            <NavItem icon={Settings} label="Account" />
           </div>
         </nav>
       </div>
@@ -53,8 +65,9 @@ export default function Sidebar({ isOpen, setIsOpen }) {
   );
 }
 
-/* Helper Component for Sidebar Buttons */
-function NavItem({ icon, label, active = false }) {
+/* Helper Component */
+// Rename prop to Icon (capitalized) so React knows it's a component
+function NavItem({ icon: Icon, label, active = false }) {
   return (
     <button className={`
       flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-left w-full
@@ -62,7 +75,8 @@ function NavItem({ icon, label, active = false }) {
         ? 'bg-[#3cc9e1] text-white shadow-sm shadow-[#5a8c76]/30' 
         : 'text-[#7d6e63] hover:bg-[#5a8c76]/10 hover:text-[#3cc9e1]'}
     `}>
-      <span className="material-symbols-outlined text-[20px]">{icon}</span>
+      {/* Render the icon component */}
+      <Icon size={20} /> 
       <span className="text-sm font-semibold">{label}</span>
     </button>
   );

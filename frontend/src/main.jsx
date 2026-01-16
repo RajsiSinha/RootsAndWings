@@ -14,6 +14,7 @@ import { ClerkProvider, useUser, SignedIn, SignedOut, RedirectToSignIn } from '@
 import DonatorDashboard from './components/Donator/DonatorDashboard'
 import OrphanageDashboard from './components/Orphanage/OrphanageDashboard'
 import RoleSelection from './components/Home/RoleSelection'
+import SmartAdoption from './pages/SmartAdoption'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!PUBLISHABLE_KEY) {
@@ -59,6 +60,7 @@ const router = createBrowserRouter(
       <Route path='/' element={<Home />} />
       <Route path='/role-selection' element={<RoleSelection />} />
       <Route path='/donor-dashboard' element={<DonatorDashboard />} />
+      <Route path='/smart-adoption' element={<SmartAdoption />} />
       <Route path='/orphanage-dashboard' element={<OrphanageDashboard />} />
     </Route>
   )

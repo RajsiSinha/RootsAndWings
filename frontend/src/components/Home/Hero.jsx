@@ -3,9 +3,23 @@ import { Particles } from "@/components/ui/particles";
 import img1 from '../../assets/hero_rw1.jpeg';
 import img2 from '../../assets/hero_rw2.jpeg';
 import img3 from '../../assets/hero_rw3.jpeg';
+import { useUser, useClerk } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom"
 
 const Hero = () => {
-  const particleColor = "#94a3b8"; 
+  const particleColor = "#94a3b8";
+  const { user } = useUser();
+  const { openSignIn } = useClerk();
+  const navigate = useNavigate();
+
+  // 4. Logic for the button
+  const handleGetStarted = () => {
+    if (user) {
+      navigate('/donor-dashboard');
+    } else {
+      openSignIn();
+    }
+  };
 
   return (
     <div className="relative w-full overflow-hidden bg-gradient-to-br from-slate-50 via-white to-cyan-50/40 pt-32 pb-20 lg:h-[600px] lg:pt-28 lg:pb-16 flex items-center">
@@ -13,7 +27,7 @@ const Hero = () => {
       {/* --- PARTICLES BACKGROUND --- */}
       <Particles
         className="absolute inset-0 z-0 opacity-50"
-        quantity={60} 
+        quantity={60}
         ease={80}
         color={particleColor}
         refresh
@@ -73,9 +87,13 @@ const Hero = () => {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mt-8 w-full sm:w-auto relative">
-            <a href="#adopt" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-bold text-white transition-all duration-200 bg-cyan-500 rounded-full shadow-md hover:bg-cyan-600 hover:shadow-cyan-500/40 hover:-translate-y-0.5">
-              Get Started
-            </a>
+            <button
+              onClick={handleGetStarted}
+              className="cursor-pointer w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-bold text-white transition-all duration-200 bg-cyan-500 rounded-full shadow-md hover:bg-cyan-600 hover:shadow-cyan-500/40 hover:-translate-y-0.5"
+            >
+              {/* Conditional Text Logic */}
+              {user ? "Go to Dashboard" : "Get Started"}
+            </button>
 
             <a href="#story" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3 text-sm font-bold text-slate-700 transition-all duration-200 bg-white border border-slate-200 rounded-full hover:bg-slate-50 hover:border-cyan-200 hover:text-cyan-600">
               <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor"><path fillRule="evenodd" clipRule="evenodd" d="M8.0416 4.9192C7.37507 4.51928 6.5271 4.99939 6.5271 5.77669L6.5271 18.2232C6.5271 19.0005 7.37507 19.4806 8.0416 19.0807L18.4137 12.8574C19.061 12.469 19.061 11.5308 18.4137 11.1424L8.0416 4.9192Z" /></svg>
