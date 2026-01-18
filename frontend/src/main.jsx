@@ -1,4 +1,4 @@
-import { StrictMode, useEffect } from 'react' // Import useEffect
+import { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import {
@@ -10,11 +10,12 @@ import {
   Route,
 } from 'react-router-dom'
 import Home from './pages/Home'
-import { ClerkProvider, useUser, SignedIn, SignedOut, RedirectToSignIn } from '@clerk/clerk-react'
+import { ClerkProvider, useUser } from '@clerk/clerk-react'
 import DonatorDashboard from './components/Donator/DonatorDashboard'
 import OrphanageDashboard from './components/Orphanage/OrphanageDashboard'
 import RoleSelection from './components/Home/RoleSelection'
 import SmartAdoption from './pages/SmartAdoption'
+import Layout from './Layout'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!PUBLISHABLE_KEY) {
@@ -28,8 +29,7 @@ const AuthWrapper = () => {
   // 1. SYNC USER TO MONGODB
   useEffect(() => {
     if (isLoaded && isSignedIn && user) {
-      // Call your backend to create/find the user
-      // Note: Make sure the URL matches your backend route
+      // Use the correct env variable
       fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/get-user`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -45,8 +45,6 @@ const AuthWrapper = () => {
 
   if (!isLoaded) return <div className="flex h-screen items-center justify-center">Loading...</div>;
 
-  // 2. REDIRECT IF ROLE IS MISSING
-  // If user is logged in BUT has no role, force them to Role Selection
   if (isSignedIn && !user?.publicMetadata?.role && window.location.pathname !== '/role-selection') {
     return <Navigate to="/role-selection" replace />;
   }
@@ -56,12 +54,21 @@ const AuthWrapper = () => {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
+    // Level 1: AuthWrapper (Protects ALL routes)
     <Route element={<AuthWrapper />}>
-      <Route path='/' element={<Home />} />
-      <Route path='/role-selection' element={<RoleSelection />} />
+      
+      {/* Group A: Pages WITH Navbar & Footer (Layout) */}
+      <Route element={<Layout />}>
+        <Route path='/' element={<Home />} />
+        <Route path='/role-selection' element={<RoleSelection />} />
+        <Route path='/smart-adoption' element={<SmartAdoption />} />
+      </Route>
+
+      {/* Group B: Pages WITHOUT Navbar (Dashboards) */}
+      {/* These are direct children of AuthWrapper, so they bypass Layout */}
       <Route path='/donor-dashboard' element={<DonatorDashboard />} />
-      <Route path='/smart-adoption' element={<SmartAdoption />} />
       <Route path='/orphanage-dashboard' element={<OrphanageDashboard />} />
+
     </Route>
   )
 )

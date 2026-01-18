@@ -10,7 +10,7 @@ export default function SmartAdoption() {
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* --- Header Section (Matches Reference) --- */}
-        <div className="space-y-2">
+        <div className="space-y-2 mt-20">
            <div className="text-sm text-slate-500 font-medium">Home &gt; Smart Adoption Calendar</div>
            <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
              Schedule Meaningful Time
