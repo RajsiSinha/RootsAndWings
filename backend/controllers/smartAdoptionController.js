@@ -1,12 +1,12 @@
-import Adoption from '../models/adoption.js'; 
-import moment from 'moment'; 
+import Adoption from '../models/adoption.js';
+import moment from 'moment';
 
 // 1. GET BOOKED DATES: Returns list of days that are already taken
 export const getBookedDates = async (req, res) => {
   try {
     // Frontend sends ?month=2023-10
-    const { month } = req.query; 
-    
+    const { month } = req.query;
+
     // Define start/end of that month
     const startDate = moment(month).startOf('month');
     const endDate = moment(month).endOf('month');
@@ -46,12 +46,25 @@ export const bookVisit = async (req, res) => {
   }
 };
 
+// 3. GET USER ADOPTIONS
+export const getUserAdoptions = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const adoptions = await Adoption.find({ userId }).sort({ date: -1 });
+
+    res.json(adoptions); // Returns array of adoptions
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // 3. IMPACT MATH (Kept as is)
 export const getImpactRates = (req, res) => {
   const rates = {
-    mealCost: 50,      
-    supplementCost: 15, 
-    educationCost: 200 
+    mealCost: 50,
+    supplementCost: 15,
+    educationCost: 200
   };
   res.json(rates);
 };
