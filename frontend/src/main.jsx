@@ -16,6 +16,10 @@ import OrphanageDashboard from './components/Orphanage/OrphanageDashboard'
 import RoleSelection from './components/Home/RoleSelection'
 import SmartAdoption from './pages/SmartAdoption'
 import Layout from './Layout'
+import RootsOfLove from './components/DigitalTwin/RootsOfLove';
+import ImpactStories from "./components/Donator/ImpactStories/ImpactStories";
+
+
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!PUBLISHABLE_KEY) {
@@ -62,6 +66,9 @@ const router = createBrowserRouter(
         <Route path='/' element={<Home />} />
         <Route path='/role-selection' element={<RoleSelection />} />
         <Route path='/smart-adoption' element={<SmartAdoption />} />
+        <Route path='/roots-of-love' element={<RootsOfLove />} />
+        <Route path="/impact-stories" element={<ImpactStories />} />
+
       </Route>
 
       {/* Group B: Pages WITHOUT Navbar (Dashboards) */}

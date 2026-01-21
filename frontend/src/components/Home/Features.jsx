@@ -21,7 +21,7 @@ const Features = () => {
         },
         {
             title: "Roots of Love (Digital Twin)",
-            link: '/roots-love', // Added placeholder link
+            link: '/roots-of-love', // Added placeholder link
             description: "Adopt a sapling and watch its digital twin grow. Weekly photo updates from the admin.",
             icon: <Sprout className="w-6 h-6 text-slate-700" strokeWidth={1.5} />,
             highlight: "Gamified Philanthropy"
