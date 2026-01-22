@@ -1,5 +1,5 @@
 import React from 'react'
-import Calendar from '@/components/SmartAdoption/Calender'
+import Calendar from '@/components/SmartAdoption/Calendar'
 import SmartSuggestion from '@/components/SmartAdoption/SmartSuggestion'
 
 export default function SmartAdoption() {

@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes.js';
-import adoptionRoutes from './models/adoption.js';
+import adoptionRoutes from './routes/AdoptionRoutes.js';
+import router from './routes/rootsRoutes.js';
 
 // Initialize dotenv to load .env variables
 dotenv.config();
@@ -15,7 +16,7 @@ app.use(cors({
   origin: ["https://roots-and-wings-lilac.vercel.app", "http://localhost:5173"], // Allow your Vercel app and local dev
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true // Allow cookies/headers if needed
-})); 
+}));
 app.use(express.json()); // Parse JSON bodies (req.body)
 
 // Database Connection
@@ -38,6 +39,8 @@ app.get('/', (req, res) => {
 });
 app.use('/api/users', userRoutes);
 app.use('/api/adoption', adoptionRoutes);
+
+app.use('/api/roots', router);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

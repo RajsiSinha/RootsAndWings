@@ -20,6 +20,13 @@ import RootsOfLove from './components/DigitalTwin/RootsOfLove';
 import ImpactStories from "./components/Donator/ImpactStories/ImpactStories";
 
 
+import RootsOfLove from './components/DigitalTwin/RootsOfLove'
+import OverviewDashboard from './components/Orphanage/Overview/OverviewDashboard'
+import VisitScheduler from './components/Orphanage/Scheduler/VisitScheduler'
+import InventoryDashboard from './components/Orphanage/Inventory/InventoryDashboard'
+import PlantDashboard from './components/Orphanage/PlantManager/AdminPlantManager'
+import AdminPlantManager from './components/Orphanage/PlantManager/AdminPlantManager'
+import AdoptionGallery from './components/DigitalTwin/AdoptionGallery'
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 if (!PUBLISHABLE_KEY) {
@@ -69,12 +76,18 @@ const router = createBrowserRouter(
         <Route path='/roots-of-love' element={<RootsOfLove />} />
         <Route path="/impact-stories" element={<ImpactStories />} />
 
+        <Route path='/roots-love' element={<RootsOfLove />} />
+        <Route path='/adopt' element={<AdoptionGallery />} />
       </Route>
 
       {/* Group B: Pages WITHOUT Navbar (Dashboards) */}
       {/* These are direct children of AuthWrapper, so they bypass Layout */}
       <Route path='/donor-dashboard' element={<DonatorDashboard />} />
-      <Route path='/orphanage-dashboard' element={<OrphanageDashboard />} />
+      <Route path='/orphanage-dashboard' element={<OverviewDashboard />} />
+
+      <Route path='/visit-scheduler' element={<VisitScheduler />} />
+      <Route path='/inventory-dashboard' element={<InventoryDashboard />} />
+      <Route path='/plant-dashboard' element={<AdminPlantManager />} />
 
     </Route>
   )

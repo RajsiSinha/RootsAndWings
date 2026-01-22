@@ -20,8 +20,8 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "Adopt a Grandparent", href: "#adopt" },
-    { name: "Impact Data", href: "#impact" },
+    { name: "Adopt a Day", href: "#adopt" },
+    { name: "Roots of Love", href: "#impact" },
     { name: "Community", href: "#community" },
   ];
 

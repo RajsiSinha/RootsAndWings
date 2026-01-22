@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../common/Sidebar";
+import Sidebar from "../Common/Sidebar";
 import GlobalMetrics from "./GlobalMetrics";
 import ImpactAnalytics from "./ImpactAnalytics";
 import ActivityFeed from "./ActivityFeed";
@@ -14,7 +14,7 @@ export default function OverviewDashboard() {
 
       <main className="flex-1 flex flex-col p-6 lg:p-8 overflow-hidden">
         <div className="max-w-[1600px] w-full mx-auto flex flex-col h-full">
-          
+
           {/* Header: Compact */}
           <header className="flex justify-between items-center mb-6 shrink-0">
             <div>
@@ -30,7 +30,7 @@ export default function OverviewDashboard() {
 
           {/* MAIN GRID: Self-adjusting layout */}
           <div className="grid grid-cols-12 gap-6 flex-1 min-h-0">
-            
+
             {/* Left Column (8/12) */}
             <div className="col-span-12 lg:col-span-8 flex flex-col gap-6 min-h-0">
               {/* Analytics: 35% of space */}
@@ -38,7 +38,7 @@ export default function OverviewDashboard() {
                 <ImpactAnalytics />
               </div>
               {/* Facility Alerts: 65% of space - adjusting to fill */}
-              <div className="flex-1 min-h-0"> 
+              <div className="flex-1 min-h-0">
                 <FacilityAlerts />
               </div>
             </div>

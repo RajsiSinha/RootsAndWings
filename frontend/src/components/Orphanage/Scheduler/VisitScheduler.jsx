@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import Sidebar from '../common/Sidebar';
+import Sidebar from '../Common/Sidebar';
 import OrchardCalendar from './OrchardCalendar';
 import PendingApprovals from './PendingApprovals';
 
